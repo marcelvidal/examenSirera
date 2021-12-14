@@ -11,7 +11,7 @@ function RandomentreDos(min, max) {
 var maximFlocs = 60;
 var fotogrames = 10;
 var segons = 1 / fotogrames * 1000;
-
+var contador = 0;
 
 
 
@@ -68,29 +68,40 @@ function iniciarNeu() {
         var flocs = document.getElementById("flocs");
         var moviment = false;
         var height = window.innerHeight;
-  
+
 
         for (let i = 0; i < flocs.children.length; i++) {
-            var top = flocs.children[i].style.top;
+            var top = flocs.children[i].style.top; // POSICIO ACTUAL IMATGE
+            var left = flocs.children[i].style.left;
             top = Number.parseInt(top); // SEMPRE OPERAR AMB NUMEROS I AFEXIR RESULTAT AL FINAL
-            console.log(top);
 
 
             //Tots els fills del div amb id flocs que son imatges
-            if (top <= height) {
+            if (top >= 0) { // si la posicio de la imatge es mes gran o igual a 0 
                 moviment = true;
+                contador++;
+            }
+
+
+            if (top >= height) { // si la posicio de la imatge a superat o es igual a la llargada maxima de la pantalla
+                moviment = false;
             }
 
             if (moviment == true) {
-                var resultat = top + topImagePosition; // OPERAR PRIMER AMB NUMEROS
+                var resultat = top + contador; // OPERAR PRIMER AMB NUMEROS // RESULTAT = POSICIO ACTUAL IMATGE + CONTADOR
                 flocs.children[i].style.top = resultat + "px"; // AFEGIR PX AL RESULTAT
 
+            } else {
+                // PER POSAR LA IMATGE QUE CAIGUI I NO COMENCIN TOTES DESDE ADAL DE TOT LA POSEM ON ESTAVA AL PRINCIPI
+                var resultat = top = - flocs.children[i].top;
+                flocs.children[i].style.top = resultat + "px";
+               
+                console.log("posicio imatge: " + topImagePosition + "posicio Actual:" + flocs.children[i].style.top)
             }
 
 
-            if (top >= height) {
-        
-            }
+
+
 
             // SI EL MOVIMENT ES FALSE ES QE A DE TORNAR A COMENÇAR TOT
 
