@@ -72,7 +72,7 @@ function iniciarNeu() {
 
         for (let i = 0; i < flocs.children.length; i++) {
             var top = flocs.children[i].style.top;
-            top = Number.parseInt(top);
+            top = Number.parseInt(top); // SEMPRE OPERAR AMB NUMEROS I AFEXIR RESULTAT AL FINAL
             console.log(top);
 
 
@@ -82,8 +82,8 @@ function iniciarNeu() {
             }
 
             if (moviment == true) {
-                topImagePosition++;
-                flocs.children[i].style.top = topImagePosition+ "px";
+                var resultat = top + topImagePosition; // OPERAR PRIMER AMB NUMEROS
+                flocs.children[i].style.top = resultat + "px"; // AFEGIR PX AL RESULTAT
 
             }
 
