@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>El DOM</title>
+	
+</head>
+
+<body>
+	<button onclick="obrirFinestra()">Obrir</button>
+	<button onclick="tancarFinestra()">Tancar</button>
+	<button onclick="finestraMoviment()">Finestra moviment</button>
+	<script>
+
+
+
+
+
+		var finestra, finestra2, t ;
+
+
+        
+		function obrirFinestra(){
+			finestra = window.open("http://www.super3.cat/","finestra", "width=200, height=100")
+		}
+		function tancarFinestra(){
+			finestra.close(); 
+		
+		}
+		function finestraMoviment(){
+			finestra2 = window.open("","finestra2", "width=300, height=200")
+			finestra2.moveTo(200, 300);                                  // Moves the new window    			
+			t = setInterval(moureFinestra, 100);
+			setTimeout(pararFinestra, 5000);
+		}
+		function moureFinestra(){
+			x = (Math.round(Math.random()) * 20) - 10;
+			y = (Math.round(Math.random()) * 20) - 10;
+			//finestra2.moveTo(finestra2.screenX + x, finestra2.screenY + y);  
+			finestra2.moveBy(x,y);
+			
+		}
+		function pararFinestra(){
+			clearInterval(t);
+		}
+
+
+
+
+
+
+
+
+
+
+	</script>
+	</body>
+</html>
+
+
