@@ -55,7 +55,7 @@ class moviment {
 		var leftImatge = t_.img.style.left;
 		topImatge = Number.parseInt(topImatge);
 		leftImatge = Number.parseInt(leftImatge); // PARSE INT PER A QE ES PUGUI COMPARAR SINO COMPARA STRING AMB INT I NO FUNCIONA
-
+		
 
 
 		///PREEGUNTAR PERQUE EL OBJECTE NO ES MOU SI LA VARIABLE  MOVIMENT NO ESTA DECLARADA COM A OBJECTE LA CONDICIO ES AL FER -- A LA POSICIO ES TORNA TRUE PERQUE LA IMATGE TORNA A TINDRE TOP < QE ALTURA DE LA PAGINA
@@ -65,7 +65,7 @@ class moviment {
 
 
 
-		
+
 
 		if (topImatge + 200 >= window.innerHeight) {
 			t_.moviment = false;

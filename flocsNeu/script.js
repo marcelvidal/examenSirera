@@ -68,12 +68,13 @@ function iniciarNeu() {
         var flocs = document.getElementById("flocs");
         var moviment = false;
         var height = window.innerHeight;
-        var width = window.innerWidth;
+  
 
         for (let i = 0; i < flocs.children.length; i++) {
             var top = flocs.children[i].style.top;
             top = Number.parseInt(top);
             console.log(top);
+
 
             //Tots els fills del div amb id flocs que son imatges
             if (top <= height) {
@@ -81,14 +82,14 @@ function iniciarNeu() {
             }
 
             if (moviment == true) {
-                posicio++;
-                flocs.children[i].style.top = posicio + "px";
+                topImagePosition++;
+                flocs.children[i].style.top = topImagePosition+ "px";
+
             }
 
 
             if (top >= height) {
-                top =- flocs.children[i].height
-                flocs.children[i].style.top = posicioVertical + 'px';
+        
             }
 
             // SI EL MOVIMENT ES FALSE ES QE A DE TORNAR A COMENÇAR TOT
