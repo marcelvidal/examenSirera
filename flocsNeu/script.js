@@ -11,12 +11,11 @@ function RandomentreDos(min, max) {
 var maximFlocs = 60;
 var fotogrames = 10;
 var segons = 1 / fotogrames * 1000;
-var contador = 0;
+var posicio = 0;
+var moviment = false;
 
-
-
+// FUNCIOR QE VOLCA ELS FLOCS DE NEU(IMATGES) AL HTML
 function iniciarNeu() {
-    var posicio = 0;
 
     //CREAR DIV 
     var div = document.createElement("div");
@@ -34,88 +33,132 @@ function iniciarNeu() {
 
         //GENERAR TAMANY ALEATORI DELS FLOCS
         var amplada = RandomentreDos(15, 30);
-        var height = amplada;
-
+        var height = RandomentreDos(15, 30);
 
 
         //POSICIONS ALEATORIES ENTRE 0 I EL MAXIM DE LA PANTALLA
         var heightScreen = window.innerHeight;
         var widthScreen = window.innerWidth;
 
-        //var topIamagePosition = RandomentreDos(0, heightScreen);
-        var leftImagePosition = RandomentreDos(0, widthScreen);
-        var topImagePosition = RandomentreDos(0, heightScreen);
+
 
         //CREAR LA IMATGE
-
         var img = document.createElement("img");
         img.src = "images/snow.png";
+        img.width = amplada;
+        img.height = height;
 
-        img.style.width = amplada + "px";
-        img.style.height = height + "px";
-        img.style.top = topImagePosition + "px";
-        img.style.left = leftImagePosition + "px";
+        //MIDA IMATGE
+
+
+        // POSICIO IMATGE
+        img.style.top = RandomentreDos(0, heightScreen) + "px";
+        img.style.left = RandomentreDos(0, widthScreen) + "px";
+
 
         //AFEGIR IMATGE
         div.appendChild(img);
 
 
 
+    }
+}
+
+window.setInterval(function () { moureFlocs() }, segons);
 
 
-    } setInterval(function movimentNeu() {
-
-        var flocs = document.getElementById("flocs");
-        var moviment = false;
-        var height = window.innerHeight;
+/*
+function moureFlocs() {
 
 
-        for (let i = 0; i < flocs.children.length; i++) {
-            var top = flocs.children[i].style.top; // POSICIO ACTUAL IMATGE
-            var left = flocs.children[i].style.left;
-            top = Number.parseInt(top); // SEMPRE OPERAR AMB NUMEROS I AFEXIR RESULTAT AL FINAL
+    var flocs = document.getElementById("flocs");
+
+    // ALTURA I AMPLADA DE LA PAGINA
+    var ScreenWidth = screen.width;
+    var ScreenHeight = screen.height;
 
 
-            //Tots els fills del div amb id flocs que son imatges
-            if (top >= 0) { // si la posicio de la imatge es mes gran o igual a 0 
-                moviment = true;
-                contador++;
-            }
-
-
-            if (top >= height) { // si la posicio de la imatge a superat o es igual a la llargada maxima de la pantalla
-                moviment = false;
-            }
-
-            if (moviment == true) {
-                var resultat = top + contador; // OPERAR PRIMER AMB NUMEROS // RESULTAT = POSICIO ACTUAL IMATGE + CONTADOR
-                flocs.children[i].style.top = resultat + "px"; // AFEGIR PX AL RESULTAT
-
-            } else {
-                // PER POSAR LA IMATGE QUE CAIGUI I NO COMENCIN TOTES DESDE ADAL DE TOT LA POSEM ON ESTAVA AL PRINCIPI
-                var resultat = top = - flocs.children[i].top;
-                flocs.children[i].style.top = resultat + "px";
-               
-                console.log("posicio imatge: " + topImagePosition + "posicio Actual:" + flocs.children[i].style.top)
-            }
+    for (var i = 0; i < flocs.children.length; i++) {
+        var posicioVertical = flocs.children[i].style.top; // POSICIO ACTUAL DE LA IMATGE
 
 
 
 
-
-            // SI EL MOVIMENT ES FALSE ES QE A DE TORNAR A COMENÇAR TOT
-
+        posicioVertical = parseInt(posicioVertical);
 
 
+        if (posicioVertical >= ScreenHeight) {
+            moviment = false;
+        }
 
-
-
+        if (posicioVertical >= 0) {
+            moviment = true;
+            posicio++;
         }
 
 
+        if (moviment) {
+            var resultat = posicioVertical + posicio; //posicio = +1
+            flocs.children[i].style.top = resultat + "px"
+            console.log("resultat ->" + resultat + "posicio ->" + posicio + "posicioVertical ->" + posicioVertical);
+        }
 
-    }, 100);
+
+      else{
+        flocs.children[i].style.top = 0 + "px"
+      }
+
+    }
+
 }
+*/
 
 
 
+function moureFlocs() {
+
+    var flocs = document.getElementById("flocs");
+
+    // ALTURA I AMPLADA DE LA PAGINA
+    var ScreenWidth = screen.width;
+    var ScreenHeight = screen.height;
+
+
+    for (var i = 0; i < flocs.children.length; i++) {
+        var posicioVertical = flocs.children[i].style.top; // POSICIO ACTUAL DE LA IMATGE
+
+
+        posicioVertical = parseInt(posicioVertical);
+
+
+        if (posicioVertical >= ScreenHeight) {
+            moviment = false;
+        }
+
+        if (posicioVertical >= 0) {
+            moviment = true;
+            posicio++;
+        }
+
+
+        if (moviment) {
+            var resultat = posicioVertical + posicio; //posicio = +1
+            
+            //console.log("resultat ->"+ resultat + "posicio ->"+posicio +"posicioVertical ->"+ posicioVertical );
+
+            if (resultat > screen.height) {
+
+                flocs.children[i].style.top = 0 +"px";
+                posicio = 0;
+                posicioVertical = 0;
+
+                console.log( flocs.children[i].style.top);
+            } else {
+
+                flocs.children[i].style.top = resultat + "px"
+
+            }
+        } 
+    }
+
+}
